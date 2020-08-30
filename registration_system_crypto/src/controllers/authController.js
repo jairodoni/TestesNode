@@ -7,14 +7,12 @@ const router = express.Router();
 router.post('/register', async (request, response) => {
   try{
     const result = await User.create(request.body);
-    const {password, ...user} = result.toObject();
+    const {...user} = result.toObject();
     user.password = undefined;
-    console.log("TESTE",user)
+    console.log(user)
     response.send(user);
   } catch(err) {
-
-  response.status(400).send({ error: "Registration faild" });
-    
+    response.status(400).send({ error: "Registration faild" });
   }
 });
 
