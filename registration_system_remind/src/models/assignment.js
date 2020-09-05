@@ -1,4 +1,4 @@
-const mongoose = require('../../database');
+const mongoose = require('../database');
 
 const AssignmentSchema = new mongoose.Schema({
   title:{
@@ -20,10 +20,6 @@ const AssignmentSchema = new mongoose.Schema({
   repeat:{
     type: Boolean,
     require: true,
-  },
-  dayWeek:{
-    type: Date,
-    require: Date.getDay,
   },
   user:{
   type: mongoose.Schema.Types.ObjectId,

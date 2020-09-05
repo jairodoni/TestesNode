@@ -1,4 +1,4 @@
-const mongoose = require('../../database');
+const mongoose = require('../database');
 const bcrypt = require('bcryptjs');
 
 
@@ -35,13 +35,6 @@ const UserSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-
-    
-// function formatDate(date){
-//   let day = data.setDate();
-//   let month = data.setMonth();
-//   let yaer = data.setDate();
-// }
 
 
 UserSchema.pre('save', async function(next) {
