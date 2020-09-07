@@ -17,6 +17,10 @@ const AssignmentSchema = new mongoose.Schema({
     type: Date,
     require: true,
   },
+  dayWeek:{
+    type: Number,
+    require: true,
+  },
   repeat:{
     type: Boolean,
     require: true,

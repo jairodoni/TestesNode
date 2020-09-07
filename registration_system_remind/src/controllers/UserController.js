@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth');
 const User = require('../models/user');
 
+
 function generateToken(params = {}) {
   return jwt.sign(params, authConfig.secret,{
     expiresIn: 86400,
@@ -15,7 +16,6 @@ module.exports ={
     try{
       if(await User.findOne({ email }))
         return res.status(400).send({ error: "User already existe." });
-  
   
       const user = await User.create(req.body);
   

@@ -2,6 +2,8 @@ const crypto = require('crypto');
 const mailer = require('../modules/mailer');
 const User = require('../models/user');
 
+
+
 module.exports ={
   async create(req, res){
     const { email } = req.body;

@@ -6,52 +6,41 @@ const router = express.Router();
 
 router.use(authMiddleware);
 module.exports = {
-  async index(req, res){
-    try {
-      const assignments = await Assignment.find().populate('user');
-
-      return res.send({ assignments });
-    } catch (error) {
-      return res.status(400).send({ error: 'Erro loading assignments' });
-    }
-  },
-
-  async show(req, res){
-    try {
-      const assignment = await Assignment.findById(req.params.assignmentId).populate('user');
-
-      return res.send({ assignment });
-    } catch (error) {
-      return res.status(400).send({ error: 'Erro loading assignment' });
-    }
-  },
-
   async store(req, res){
     try {
       const status = false;
       const repeat = false;
-      const { description, dateActivity } = req.body;
+      const { description, dateActivity, dayWeek } = req.body;
       
-      const assignment = await Assignment.create({ status, description, dateActivity, repeat, user: req.userId});
+      if(dayWeek === 0 || dayWeek > 7)
+        return res.status(400).send({ error: 'Not aceptable valor.' });
+      
+      
+      const assignment = await Assignment.create({ status, description, dateActivity,  repeat, dayWeek, user: req.userId});
 
       await assignment.save();
 
-      return res.send({ assignment });
+      return res.json( assignment );
     } catch (err) {
       console.log(err);
-      return res.status(400).send({ error: 'Error creating new assignment' });
+      console.log(err);
+      res.status(400).send({ error: 'Error creating new assignment' });
     }
   },
 
   async update(req, res){
     try {
-      const { description, status, repeat, dateActivity } = req.body;
+      const { description, status, repeat, dateActivity, dayWeek } = req.body;
+
+      if(dayWeek === 0 || dayWeek > 7 )
+        return res.status(400).send({ error: 'Not aceptable valor.' });
 
       const assignment = await Assignment.findByIdAndUpdate(req.params.assignmentId,{ 
         description,
         status,
         repeat, 
         dateActivity,
+        dayWeek,
       },  { new: true });
 
       await assignment.save();
