@@ -54,7 +54,7 @@ routes.post('/assignments',  celebrate({
   [Segments.BODY]: Joi.object().keys({
     description: Joi.string().required(),
     dateActivity: Joi.date().required(),
-    dayWeek: Joi.number().required(),
+    dayWeek: Joi.array().required(),
   })
 }), AssignmentController.store);
 
@@ -64,7 +64,7 @@ routes.put('/assignments/:assignmentId', celebrate({
     status: Joi.boolean().required(),
     repeat: Joi.boolean().required(),
     dateActivity: Joi.date().required(),
-    dayWeek: Joi.number().required(),
+    dayWeek: Joi.array().required(),
   }),
   [Segments.PARAMS]: Joi.object().keys({
     assignmentId: Joi.string(),

@@ -11,11 +11,9 @@ module.exports = {
       const status = false;
       const repeat = false;
       const { description, dateActivity, dayWeek } = req.body;
-      
-      if(dayWeek === 0 || dayWeek > 7)
-        return res.status(400).send({ error: 'Not aceptable valor.' });
-      
-      
+
+      dateActivity.setHours(dateActivity.getHours() - 3);
+            
       const assignment = await Assignment.create({ status, description, dateActivity,  repeat, dayWeek, user: req.userId});
 
       await assignment.save();
@@ -31,9 +29,6 @@ module.exports = {
   async update(req, res){
     try {
       const { description, status, repeat, dateActivity, dayWeek } = req.body;
-
-      if(dayWeek === 0 || dayWeek > 7 )
-        return res.status(400).send({ error: 'Not aceptable valor.' });
 
       const assignment = await Assignment.findByIdAndUpdate(req.params.assignmentId,{ 
         description,
