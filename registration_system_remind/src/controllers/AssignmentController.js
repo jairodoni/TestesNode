@@ -13,7 +13,7 @@ module.exports = {
       const { description, dateActivity, dayWeek } = req.body;
 
       dateActivity.setHours(dateActivity.getHours() - 3);
-            
+
       const assignment = await Assignment.create({ status, description, dateActivity,  repeat, dayWeek, user: req.userId});
 
       await assignment.save();
