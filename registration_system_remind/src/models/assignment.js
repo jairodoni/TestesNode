@@ -1,26 +1,26 @@
 const mongoose = require('../database');
 
 const AssignmentSchema = new mongoose.Schema({
-  status:{
-    type: Boolean,
-    require: false,
-  },
   description:{
     type: String,
     require: true,
   },
+  status:{
+    type: Boolean,
+    require: false,
+  },
   dateActivity:{
     type: Date,
+    require: false,
+  },
+  repeat:{
+    type: Boolean,
     require: false,
   },
   dayWeek:[{
     type: Number,
     require: true,
   }],
-  repeat:{
-    type: Boolean,
-    require: false,
-  },
   user:{
   type: mongoose.Schema.Types.ObjectId,
   ref: 'User',

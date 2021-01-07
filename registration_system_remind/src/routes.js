@@ -44,21 +44,21 @@ routes.post('/reset_password',  celebrate({
 //Catastro de Lembretes
 routes.get('/assignments', AssignmentListController.index);
 
-routes.get('/assignments/:assignmentId', celebrate({
+routes.get('/assignment/:assignmentId', celebrate({
   [Segments.PARAMS]: Joi.object().keys({
     assignmentId: Joi.string(),
   })
 }), AssignmentListController.show);
 
-routes.post('/assignments',  celebrate({
+routes.post('/assignment',  celebrate({
   [Segments.BODY]: Joi.object().keys({
-    description: Joi.string().required(),
+    description: Joi.string().required().max(400),
     dateActivity: Joi.date().required(),
     dayWeek: Joi.array().required(),
   })
 }), AssignmentController.store);
 
-routes.put('/assignments/:assignmentId', celebrate({
+routes.put('/assignment/:assignmentId', celebrate({
   [Segments.BODY]: Joi.object().keys({
     description: Joi.string().required(),
     status: Joi.boolean().required(),
@@ -71,7 +71,7 @@ routes.put('/assignments/:assignmentId', celebrate({
   })
 }), AssignmentController.update);
 
-routes.delete('/assignments/:assignmentId', celebrate({
+routes.delete('/assignment/:assignmentId', celebrate({
   [Segments.PARAMS]: Joi.object().keys({
     assignmentId: Joi.string().required(),
   })
