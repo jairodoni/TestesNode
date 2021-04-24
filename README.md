@@ -1,2 +1,2 @@
 # TestesNode
-Repositório para estudos com node.js
+Repositório para estudos e pratica com Node.js
